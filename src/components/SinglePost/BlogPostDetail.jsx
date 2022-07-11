@@ -12,9 +12,11 @@ import {
 } from "@chakra-ui/react"
 import * as React from "react"
 import { VscCircleFilled } from "react-icons/vsc"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { format } from "date-fns"
 
-export const BlogPost = props => {
-  const { post, isHero } = props
+export const BlogPostDetail = props => {
+  const { blog, isHero } = props
   return (
     <Link
       _hover={{
@@ -23,8 +25,24 @@ export const BlogPost = props => {
       role="group"
     >
       <Stack spacing="8">
-        <Box overflow="hidden">
-          <Image
+        <Box
+          transition="all 0.2s"
+          _groupHover={{
+            transform: "scale(1.05)",
+          }}
+          overflow="hidden"
+          height={useBreakpointValue({
+            base: "15rem",
+            md: isHero ? "sm" : "15rem",
+          })}
+        >
+          <GatsbyImage
+            image={blog.coverImage.asset.gatsbyImageData}
+            alt={blog.coverImage.alt}
+            width="100%"
+            objectFit="cover"
+          />
+          {/* <Image
             src={post.image}
             alt={post.title}
             width="full"
@@ -37,7 +55,7 @@ export const BlogPost = props => {
             _groupHover={{
               transform: "scale(1.05)",
             }}
-          />
+          /> */}
         </Box>
         <Stack spacing="6">
           <Stack spacing="3">
@@ -47,9 +65,11 @@ export const BlogPost = props => {
               fontWeight="semibold"
               color="accent"
             >
-              <Text>{post.author.name}</Text>
+              <Text>{blog.blogCategory[0].title}</Text>
               <Icon as={VscCircleFilled} boxSize="2" />
-              <Text> {post.publishedAt}</Text>
+              <Text>
+                {format(new Date(blog.publishedAt), "p, MMM dd yyyy")}
+              </Text>
             </HStack>
             <Heading
               size={useBreakpointValue({
@@ -57,17 +77,17 @@ export const BlogPost = props => {
                 md: isHero ? "sm" : "xs",
               })}
             >
-              {post.title}
+              {blog.title}
             </Heading>
-            <Text color="muted">{post.excerpt}</Text>
+            {/* <Text color="muted">{post.excerpt}</Text> */}
           </Stack>
-          <HStack>
+          {/* <HStack>
             {post.tags.map((tag, id) => (
               <Badge key={id} colorScheme={tag.color}>
                 {tag.label}
               </Badge>
             ))}
-          </HStack>
+          </HStack> */}
         </Stack>
       </Stack>
     </Link>

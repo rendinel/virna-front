@@ -12,10 +12,10 @@ import {
 } from "@chakra-ui/react"
 import * as React from "react"
 import { FiSearch } from "react-icons/fi"
-import { BlogPost } from "./BlogPost"
+import { BlogPostDetail } from "./BlogPostDetail"
 import { posts } from "./data"
 
-export const SinglePost = () => (
+export const SinglePost = ({ blog }) => (
   <Box bg="bg-surface">
     <Box bg="bg-accent" color="on-accent">
       <Container
@@ -109,7 +109,7 @@ export const SinglePost = () => (
             md: "16",
           }}
         >
-          <BlogPost post={posts[0]} isHero />
+          <BlogPostDetail blog={blog} isHero />
         </Stack>
       </Stack>
     </Container>

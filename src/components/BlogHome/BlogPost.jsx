@@ -4,14 +4,16 @@ import {
   Heading,
   HStack,
   Icon,
-  Image,
+  // Image,
   Link,
   Stack,
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react"
 import * as React from "react"
-import { VscCircleFilled } from "react-icons/vsc"
+import { format } from "date-fns"
+import { BsSlashLg } from "react-icons/bs"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 export const BlogPost = props => {
   const { post, isHero } = props
@@ -24,7 +26,12 @@ export const BlogPost = props => {
     >
       <Stack spacing="8">
         <Box overflow="hidden">
-          <Image
+          <GatsbyImage
+            image={post.coverImage.asset.gatsbyImageData}
+            alt={post.coverImage.alt}
+            className="blog-img"
+          />
+          {/* <Image
             src={post.image}
             alt={post.title}
             width="full"
@@ -37,7 +44,7 @@ export const BlogPost = props => {
             _groupHover={{
               transform: "scale(1.05)",
             }}
-          />
+          /> */}
         </Box>
         <Stack spacing="6">
           <Stack spacing="3">
@@ -47,9 +54,9 @@ export const BlogPost = props => {
               fontWeight="semibold"
               color="accent"
             >
-              <Text>{post.author.name}</Text>
-              <Icon as={VscCircleFilled} boxSize="2" />
-              <Text> {post.publishedAt}</Text>
+              <Text fontSize="sm" fontWeight="semibold" color="accent">
+                {post.blogCategory[0].title}
+              </Text>
             </HStack>
             <Heading
               size={useBreakpointValue({
@@ -59,14 +66,12 @@ export const BlogPost = props => {
             >
               {post.title}
             </Heading>
-            <Text color="muted">{post.excerpt}</Text>
+            <Text color="muted">{post.excerpt[0].children[0].text}</Text>
           </Stack>
           <HStack>
-            {post.tags.map((tag, id) => (
-              <Badge key={id} colorScheme={tag.color}>
-                {tag.label}
-              </Badge>
-            ))}
+            <Text color="accent">
+              {format(new Date(post.publishedAt), "p, MMM dd yyyy")}
+            </Text>
           </HStack>
         </Stack>
       </Stack>

@@ -1,16 +1,18 @@
 import { Testimonials } from "./HomePage/Testimonials/Testimonials"
 import { Contact } from "./HomePage/Contact/Contact"
 import { Hero } from "./HomePage/Hero"
-import { Latest } from "./HomePage/Latest"
+import { LatestNews } from "./HomePage/LatestNews"
 import React from "react"
+import { LatestProduct } from "./HomePage/LatestProduct"
 
-export const HomePage = () => {
+export const HomePage = ({ latestNews, latestProduct }) => {
+  console.log("homePage", latestNews)
   return (
     <>
       <Hero />
-      <Latest latestTitle="Blog" />
+      <LatestNews latestNews={latestNews} />
       <Testimonials />
-      <Latest latestTitle="Shop" />
+      <LatestProduct latestProduct={latestProduct} />
       <Contact />
     </>
   )

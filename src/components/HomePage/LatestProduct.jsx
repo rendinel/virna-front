@@ -1,11 +1,11 @@
 import {
-  Avatar,
+  // Avatar,
+  // HStack,
+  // Image,
   Box,
   Button,
   Container,
   Heading,
-  HStack,
-  Image,
   Link,
   SimpleGrid,
   Stack,
@@ -13,9 +13,9 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react"
 import * as React from "react"
-import { posts } from "./dataLatest"
+import { GatsbyImage } from "gatsby-plugin-image"
 
-export const Latest = ({ latestTitle }) => {
+export const LatestProduct = ({ latestProduct }) => {
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
@@ -50,7 +50,7 @@ export const Latest = ({ latestTitle }) => {
                     md: "md",
                   }}
                 >
-                  Our {latestTitle}
+                  Our blog
                 </Text>
                 <Heading
                   size={useBreakpointValue({
@@ -58,7 +58,7 @@ export const Latest = ({ latestTitle }) => {
                     md: "md",
                   })}
                 >
-                  Latest {latestTitle} Posts
+                  Latest blog posts
                 </Heading>
               </Stack>
               <Text
@@ -88,9 +88,10 @@ export const Latest = ({ latestTitle }) => {
               lg: "8",
             }}
           >
-            {posts.map(post => (
+            {latestProduct.map(item => (
               <Link
-                key={post.id}
+                to={`/product/${item.slug.current}`}
+                key={item.id}
                 _hover={{
                   textDecor: "none",
                 }}
@@ -98,7 +99,12 @@ export const Latest = ({ latestTitle }) => {
               >
                 <Stack spacing="8">
                   <Box overflow="hidden">
-                    <Image
+                    <GatsbyImage
+                      className="blog-img"
+                      image={item.coverImage.asset.gatsbyImageData}
+                      alt={item.coverImage.alt}
+                    />
+                    {/* <Image
                       src={post.image}
                       alt={post.title}
                       width="full"
@@ -108,22 +114,21 @@ export const Latest = ({ latestTitle }) => {
                       _groupHover={{
                         transform: "scale(1.05)",
                       }}
-                    />
+                    /> */}
                   </Box>
                   <Stack spacing="3">
                     <Text fontSize="sm" fontWeight="semibold" color="accent">
-                      {post.category}
+                      {item.productCategory[0].title}
                     </Text>
-                    <Heading size="xs">{post.title}</Heading>
-                    <Text color="muted">{post.excerpt}</Text>
+                    <Heading size="xs">{item.name}</Heading>
                   </Stack>
-                  <HStack>
+                  {/* <HStack>
                     <Avatar src={post.author.avatarUrl} boxSize="10" />
                     <Box fontSize="sm">
                       <Text fontWeight="medium">{post.author.name}</Text>
                       <Text color="muted">{post.publishedAt}</Text>
                     </Box>
-                  </HStack>
+                  </HStack> */}
                 </Stack>
               </Link>
             ))}
