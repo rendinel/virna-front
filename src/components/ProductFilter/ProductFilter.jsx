@@ -3,7 +3,8 @@ import {
   Grid,
   Heading,
   HStack,
-  // Input,
+  UnorderedList,
+  ListItem,
   Stack,
   Text,
 } from "@chakra-ui/react"
@@ -22,9 +23,9 @@ import {
   // genderFilter,
   // sizeFilter,
 } from "./_data"
-import { ProductHome } from "../ProductHome"
+import { ProductHome } from "./ProductHome"
 
-export const Filter = ({ products, productsLength }) => (
+export const ProductFilter = ({ allCat, catProduct, productsCat }) => (
   <Box
     maxW="7xl"
     mx="auto"
@@ -70,7 +71,7 @@ export const Filter = ({ products, productsLength }) => (
           <ColorPicker {...colorFilter} label="Color" /> */}
           <CheckboxFilter
             spacing="3"
-            options={blueFilters.options}
+            options={allCat}
             label="Brand"
             showSearch
           />
@@ -106,9 +107,9 @@ export const Filter = ({ products, productsLength }) => (
               align="baseline"
             >
               <Heading size="md" fontSize="2xl">
-                Fiori
+                Prodotti
               </Heading>
-              <Text color="gray.500">({productsLength})</Text>
+              <Text color="gray.500">({productsCat.length})</Text>
             </Stack>
             <MobileFilter />
             <HStack
@@ -123,7 +124,7 @@ export const Filter = ({ products, productsLength }) => (
               <SortbySelect /> */}
             </HStack>
           </Stack>
-          <ProductHome products={products} />
+          {/* <ProductHome products={products} /> */}
         </Box>
       </Grid>
     </Box>

@@ -6,6 +6,12 @@ exports.createPages = async ({ graphql, actions }) => {
   const singleProductTemplate = require.resolve(
     "./src/templates/single-product.js"
   )
+  const singleProductCategoryTemplate = require.resolve(
+    "./src/templates/single-product-category.js"
+  )
+  const singleBlogCategory = require.resolve(
+    "./src/templates/single-category.js"
+  )
   const productsPerPage = 500
   const { createPage } = actions
   const result = await graphql(`
@@ -26,12 +32,30 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allSanityBlogCategory {
+        nodes {
+          id
+          slug {
+            current
+          }
+        }
+      }
+      allSanityProductCategory {
+        nodes {
+          id
+          slug {
+            current
+          }
+        }
+      }
     }
   `)
   if (result.errors) throw result.errors
 
   const blogs = result.data.allSanityBlog.nodes
   const products = result.data.allSanityProduct.nodes
+  const blogCategories = result.data.allSanityBlogCategory.nodes
+  const productCategories = result.data.allSanityProductCategory.nodes
 
   blogs.forEach(blog => {
     createPage({
@@ -46,6 +70,22 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/products/${product.slug.current}`,
       component: singleProductTemplate,
       context: { id: product.id },
+    })
+  })
+
+  blogCategories.forEach(blogCat => {
+    createPage({
+      path: `/blogs/categories/${blogCat.slug.current}`,
+      component: singleBlogCategory,
+      context: { id: blogCat.id },
+    })
+  })
+
+  productCategories.forEach(category => {
+    createPage({
+      path: `/products/categories/${category.slug.current}`,
+      component: singleProductCategoryTemplate,
+      context: { id: category.id },
     })
   })
 
