@@ -4,7 +4,7 @@ import {
   Button,
   HStack,
   Image,
-  Link,
+  // Link,
   Skeleton,
   Stack,
   Text,
@@ -13,10 +13,12 @@ import {
 } from "@chakra-ui/react"
 import * as React from "react"
 import { PriceTag } from "./PriceTag"
+import { GatsbyImage } from "gatsby-plugin-image"
+import { Link } from "gatsby"
 
 export const ProductCard = props => {
   const { product, rootProps } = props
-  const { name, imageUrl, price, salePrice, rating } = product
+
   return (
     <Stack
       spacing={useBreakpointValue({
@@ -27,7 +29,11 @@ export const ProductCard = props => {
     >
       <Box position="relative">
         <AspectRatio ratio={4 / 3}>
-          <Image
+          <GatsbyImage
+            image={product.coverImage.asset.gatsbyImageData}
+            alt={product.coverImage.alt}
+          />
+          {/* <Image
             src={imageUrl}
             alt={name}
             draggable="false"
@@ -36,30 +42,32 @@ export const ProductCard = props => {
               base: "md",
               md: "xl",
             })}
-          />
+          /> */}
         </AspectRatio>
       </Box>
       <Stack>
-        <Stack spacing="1">
+        <Stack minH="76px" spacing="1">
           <Text
             fontWeight="medium"
             color={useColorModeValue("gray.700", "gray.400")}
           >
-            {name}
+            {product.name}
           </Text>
-          <PriceTag price={price} salePrice={salePrice} currency="USD" />
+          <PriceTag price={product.price} currency="EUR" />
         </Stack>
       </Stack>
       <Stack align="center">
         <Button colorScheme="pink" isFullWidth>
           Add to cart
         </Button>
-        <Link
-          textDecoration="underline"
-          fontWeight="medium"
-          color={useColorModeValue("gray.600", "gray.400")}
-        >
-          Quick shop
+        <Link to={`/products/${product.slug.current}`}>
+          <Text
+            textDecoration="underline"
+            fontWeight="medium"
+            color={useColorModeValue("gray.600", "gray.400")}
+          >
+            Go to Product
+          </Text>
         </Link>
       </Stack>
     </Stack>

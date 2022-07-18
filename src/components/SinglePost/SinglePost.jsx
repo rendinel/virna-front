@@ -13,7 +13,7 @@ import {
 import * as React from "react"
 import { FiSearch } from "react-icons/fi"
 import { BlogPostDetail } from "./BlogPostDetail"
-import { posts } from "./data"
+// import { posts } from "./data"
 
 export const SinglePost = ({ blog }) => (
   <Box bg="bg-surface">

@@ -3,25 +3,27 @@ import {
   Button,
   Heading,
   HStack,
-  Icon,
-  Link,
   Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react"
 import * as React from "react"
-import { FiClock, FiHeart } from "react-icons/fi"
-import { RiRulerLine } from "react-icons/ri"
+// import { FiClock, FiHeart } from "react-icons/fi"
+// import { RiRulerLine } from "react-icons/ri"
 import { Gallery } from "./Gallery"
-import { Rating } from "./Rating"
-import { ColorPicker } from "./ColorPicker"
+// import { Rating } from "./Rating"
+// import { ColorPicker } from "./ColorPicker"
 import { PriceTag } from "./PriceTag"
 import { QuantityPicker } from "./QuantityPicker"
-import { SizePicker } from "./SizePicker"
-import { images } from "./_data"
-import { Latest } from "../../HomePage/Latest"
+// import { SizePicker } from "./SizePicker"
+// import { images } from "./_data"
+import { RelatedProduct } from "./RelatedProduct"
+import { Link } from "gatsby"
+import MyPortableProduct from "../MyPortableProductDescription"
+// import { Latest } from "../../HomePage/Latest"
 
-export const ProductDetails = () => {
+export const ProductDetails = ({ product, recomendedProduct }) => {
+  const imageGallery = product.imagesGallery
   return (
     <Box
       maxW="7xl"
@@ -65,7 +67,7 @@ export const ProductDetails = () => {
             }}
           >
             <Stack spacing="3">
-              <HStack alignSelf="baseline">
+              {/* <HStack alignSelf="baseline">
                 <Rating defaultValue={4} size="sm" />
                 <Link
                   href="#"
@@ -75,21 +77,20 @@ export const ProductDetails = () => {
                 >
                   12 Reviews
                 </Link>
-              </HStack>
+              </HStack> */}
               <Heading size="lg" fontWeight="medium">
-                Classic Black
+                {product.name}
               </Heading>
             </Stack>
             <PriceTag
-              price={229}
-              currency="GBP"
+              price={product.price}
+              currency="EUR"
               rootProps={{
                 fontSize: "xl",
               }}
             />
             <Text color={useColorModeValue("gray.600", "gray.400")}>
-              With a sleek design and a captivating essence, this is a modern
-              Classic made for every occasion.
+              <MyPortableProduct value={product._rawProductDescription} />
             </Text>
           </Stack>
           <Stack
@@ -102,7 +103,7 @@ export const ProductDetails = () => {
               md: "8",
             }}
           >
-            <Stack flex="1">
+            {/* <Stack flex="1">
               <ColorPicker
                 defaultValue="Black"
                 options={[
@@ -162,7 +163,7 @@ export const ProductDetails = () => {
                   View our sizing guide
                 </Link>
               </HStack>
-            </Stack>
+            </Stack> */}
           </Stack>
           <HStack
             spacing={{
@@ -176,18 +177,23 @@ export const ProductDetails = () => {
               <QuantityPicker defaultValue={1} max={3} />
             </Box>
             <Box flex="1">
-              <Button
-                variant="outline"
-                size="lg"
-                fontSize="md"
-                width="full"
-                leftIcon={<Icon as={FiHeart} boxSize="4" />}
+              <Link
+                to={`/categories/${product.productCategory[0].slug.current}`}
               >
-                Favorite
-              </Button>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  fontSize="md"
+                  width="full"
+                >
+                  <Text fontSize="sm" fontWeight="semibold" color="accent">
+                    {product.productCategory[0].title}
+                  </Text>
+                </Button>
+              </Link>
             </Box>
           </HStack>
-          <Button colorScheme="blue" size="lg">
+          <Button colorScheme="pink" size="lg">
             Add to cart
           </Button>
         </Stack>
@@ -196,10 +202,10 @@ export const ProductDetails = () => {
             overflow: "hidden",
             flex: "1",
           }}
-          images={images.slice(0, 5)}
+          images={imageGallery}
         />
       </Stack>
-      <Latest latestTitle="Related" />
+      <RelatedProduct recomendedProduct={recomendedProduct} />
     </Box>
   )
 }

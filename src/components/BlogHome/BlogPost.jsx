@@ -1,9 +1,9 @@
 import {
-  Badge,
+  // Badge,
   Box,
   Heading,
   HStack,
-  Icon,
+  // Icon,
   // Image,
   Link,
   Stack,
@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react"
 import * as React from "react"
 import { format } from "date-fns"
-import { BsSlashLg } from "react-icons/bs"
+// import { BsSlashLg } from "react-icons/bs"
 import { GatsbyImage } from "gatsby-plugin-image"
 
 export const BlogPost = props => {

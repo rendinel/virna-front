@@ -1,10 +1,10 @@
 import {
-  Badge,
+  // Badge,
   Box,
   Heading,
   HStack,
   Icon,
-  Image,
+  // Image,
   Link,
   Stack,
   Text,
@@ -14,6 +14,7 @@ import * as React from "react"
 import { VscCircleFilled } from "react-icons/vsc"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { format } from "date-fns"
+import MyPortableText from "../MyPortableText"
 
 export const BlogPostDetail = props => {
   const { blog, isHero } = props
@@ -79,7 +80,7 @@ export const BlogPostDetail = props => {
             >
               {blog.title}
             </Heading>
-            {/* <Text color="muted">{post.excerpt}</Text> */}
+            <MyPortableText value={blog._rawBody} />
           </Stack>
           {/* <HStack>
             {post.tags.map((tag, id) => (

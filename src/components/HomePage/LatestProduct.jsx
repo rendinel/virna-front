@@ -121,6 +121,9 @@ export const LatestProduct = ({ latestProduct }) => {
                       {item.productCategory[0].title}
                     </Text>
                     <Heading size="xs">{item.name}</Heading>
+                    <Button w="50%" variant="primary">
+                      Aggiungi al carrello
+                    </Button>
                   </Stack>
                   {/* <HStack>
                     <Avatar src={post.author.avatarUrl} boxSize="10" />

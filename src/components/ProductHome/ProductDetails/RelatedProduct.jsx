@@ -6,17 +6,16 @@ import {
   Button,
   Container,
   Heading,
+  Link,
   SimpleGrid,
   Stack,
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react"
 import * as React from "react"
-import { Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 
-export const LatestNews = ({ latestNews }) => {
-  console.log("latest", latestNews)
+export const RelatedProduct = ({ recomendedProduct }) => {
   const isMobile = useBreakpointValue({
     base: true,
     md: false,
@@ -89,8 +88,9 @@ export const LatestNews = ({ latestNews }) => {
               lg: "8",
             }}
           >
-            {latestNews.map(item => (
-              <Box
+            {recomendedProduct.map(item => (
+              <Link
+                to={`/product/${item.slug.current}`}
                 key={item.id}
                 _hover={{
                   textDecor: "none",
@@ -118,24 +118,15 @@ export const LatestNews = ({ latestNews }) => {
                   </Box>
                   <Stack spacing="3">
                     <Text fontSize="sm" fontWeight="semibold" color="accent">
-                      {item.blogCategory[0].title}
+                      {item.productCategory[0].title}
                     </Text>
-                    <Link to={`/blogs/${item.slug.current}`}>
-                      <Heading size="xs">{item.title}</Heading>
-                    </Link>
-                    <Text color="muted">
-                      {item.excerpt[0].children[0].text}
-                    </Text>
+                    <Heading size="xs">{item.name}</Heading>
+                    <Button w="50%" variant="primary">
+                      Aggiungi al carrello
+                    </Button>
                   </Stack>
-                  {/* <HStack>
-                    <Avatar src={post.author.avatarUrl} boxSize="10" />
-                    <Box fontSize="sm">
-                      <Text fontWeight="medium">{post.author.name}</Text>
-                      <Text color="muted">{post.publishedAt}</Text>
-                    </Box>
-                  </HStack> */}
                 </Stack>
-              </Box>
+              </Link>
             ))}
           </SimpleGrid>
           {isMobile && (

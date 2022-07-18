@@ -9,22 +9,22 @@ import {
 } from "@chakra-ui/react"
 import * as React from "react"
 import { CheckboxFilter } from "./CheckboxFilter"
-import { ColorPicker } from "./ColorPicker"
-import { PriceRangePicker } from "./PriceRangePicker"
-import { ProductBreadcrumb } from "./ProductBreadcrumb"
-import { SizePicker } from "./SizePicker"
+// import { ColorPicker } from "./ColorPicker"
+// import { PriceRangePicker } from "./PriceRangePicker"
+// import { ProductBreadcrumb } from "./ProductBreadcrumb"
+// import { SizePicker } from "./SizePicker"
 import { SortbySelect } from "./SortBySelect"
 import { MobileFilter } from "./MobileFilter"
 import {
   blueFilters,
-  breadcrumbData,
-  colorFilter,
-  genderFilter,
-  sizeFilter,
+  // breadcrumbData,
+  // colorFilter,
+  // genderFilter,
+  // sizeFilter,
 } from "./_data"
 import { ProductHome } from "../ProductHome"
 
-export const Filter = () => (
+export const Filter = ({ products, productsLength }) => (
   <Box
     maxW="7xl"
     mx="auto"
@@ -39,7 +39,7 @@ export const Filter = () => (
       lg: "12",
     }}
   >
-    <ProductBreadcrumb data={breadcrumbData} />
+    {/* <ProductBreadcrumb data={breadcrumbData} /> */}
     <Box
       mt={{
         base: "8",
@@ -61,27 +61,27 @@ export const Filter = () => (
             md: "flex",
           }}
         >
-          <CheckboxFilter
+          {/* <CheckboxFilter
             spacing="3"
             options={genderFilter.options}
             label="Gender"
           />
           <SizePicker {...sizeFilter} label="Size" />
-          <ColorPicker {...colorFilter} label="Color" />
+          <ColorPicker {...colorFilter} label="Color" /> */}
           <CheckboxFilter
             spacing="3"
             options={blueFilters.options}
             label="Brand"
             showSearch
           />
-          <Stack spacing="5">
+          {/* <Stack spacing="5">
             <label>Price range</label>
             <PriceRangePicker defaultValue={[6, 40]} />
             <HStack spacing="6">
               <Input type="number" placeholder="$500" />
               <Input type="number" placeholder="$1,000" />
             </HStack>
-          </Stack>
+          </Stack> */}
         </Stack>
 
         <Box width="full">
@@ -106,9 +106,9 @@ export const Filter = () => (
               align="baseline"
             >
               <Heading size="md" fontSize="2xl">
-                Watches
+                Fiori
               </Heading>
-              <Text color="gray.500">(300 products)</Text>
+              <Text color="gray.500">({productsLength})</Text>
             </Stack>
             <MobileFilter />
             <HStack
@@ -117,13 +117,13 @@ export const Filter = () => (
                 md: "flex",
               }}
             >
-              <Text flexShrink={0} color="gray.500" fontSize="sm">
+              {/* <Text flexShrink={0} color="gray.500" fontSize="sm">
                 Sort by
               </Text>
-              <SortbySelect />
+              <SortbySelect /> */}
             </HStack>
           </Stack>
-          <ProductHome />
+          <ProductHome products={products} />
         </Box>
       </Grid>
     </Box>
