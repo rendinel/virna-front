@@ -1,7 +1,4 @@
 import {
-  // Box,
-  // Checkbox,
-  // CheckboxGroup,
   FormLabel,
   Input,
   InputGroup,
@@ -14,14 +11,7 @@ import { FiSearch } from "react-icons/fi"
 import { Link } from "gatsby"
 
 export const CheckboxFilter = props => {
-  const {
-    options,
-    label,
-    hideLabel,
-    spacing = "2",
-    showSearch,
-    ...rest
-  } = props
+  const { options, label, hideLabel, spacing = "2", showSearch } = props
   return (
     <Stack as="fieldset" spacing={spacing}>
       {!hideLabel && (
@@ -45,20 +35,14 @@ export const CheckboxFilter = props => {
           </InputRightElement>
         </InputGroup>
       )}
+      <Link to={`/products`}>All</Link>
       {options.map(item => {
         return (
-          <Link to="/" key={item.id}>
+          <Link to={`/products/categories/${item.slug.current}`} key={item.id}>
             {item.title}
           </Link>
         )
       })}
-      {/* <CheckboxGroup {...rest}>
-        {options.map(option => (
-          <Checkbox key={option.id} value={option.id} colorScheme="pink">
-            <span>{option.title}</span>
-          </Checkbox>
-        ))}
-      </CheckboxGroup> */}
     </Stack>
   )
 }

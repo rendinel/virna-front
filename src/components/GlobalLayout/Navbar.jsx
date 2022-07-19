@@ -12,7 +12,9 @@ import {
 } from "@chakra-ui/react"
 import * as React from "react"
 import { FiHelpCircle, FiMenu, FiSearch, FiSettings } from "react-icons/fi"
+import DrawerSearch from "../DrawerSearch"
 import { Logo } from "./Logo"
+// import { StaticQuery, graphql } from "gatsby"
 
 export const Navbar = () => {
   const isDesktop = useBreakpointValue({
@@ -44,20 +46,15 @@ export const Navbar = () => {
               {isDesktop && (
                 <ButtonGroup variant="ghost" spacing="1">
                   <Button>Home</Button>
-                  <Button aria-current="page">Dashboard</Button>
-                  <Button>Tasks</Button>
-                  <Button>Bookmarks</Button>
-                  <Button>Users</Button>
+                  <Button aria-current="page">Blog</Button>
+                  <Button>Shop</Button>
                 </ButtonGroup>
               )}
             </HStack>
             {isDesktop ? (
               <HStack spacing="4">
                 <ButtonGroup variant="ghost" spacing="1">
-                  <IconButton
-                    icon={<FiSearch fontSize="1.25rem" />}
-                    aria-label="Search"
-                  />
+                  {/* <DrawerSearch isNav /> */}
                   <IconButton
                     icon={<FiSettings fontSize="1.25rem" />}
                     aria-label="Settings"

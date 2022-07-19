@@ -33,6 +33,7 @@ export const query = graphql`
         id
         name
         publishedAt
+        price
         slug {
           current
         }
@@ -48,12 +49,21 @@ export const query = graphql`
             }
           }
         }
+        coverImage {
+          alt
+          asset {
+            gatsbyImageData
+          }
+        }
       }
     }
     allSanityProductCategory {
       nodes {
         id
         title
+        slug {
+          current
+        }
       }
     }
   }
@@ -71,7 +81,7 @@ const SingleProductCategory = ({ data }) => {
   )
   return (
     <ChakraProvider theme={myTheme}>
-      <Box bg="bg-surface">
+      <Box>
         <Navbar />
         <ProductFilter
           productsCat={productsCat}

@@ -5,8 +5,6 @@ import { theme } from "@chakra-ui/pro-theme"
 import { Box } from "@chakra-ui/react"
 import { Navbar } from "../components/GlobalLayout/Navbar"
 import { Footer } from "../components/GlobalLayout/Footer"
-import { ProductHome } from "../components/ProductHome/ProductHome"
-import { Pagination } from "../components/Pagination"
 import { Filter } from "../components/ProductHome/Filter/Filter"
 
 export const ProductQuery = graphql`
@@ -39,21 +37,22 @@ export const ProductQuery = graphql`
         price
       }
     }
+    allSanityProductCategory {
+      nodes {
+        id
+        title
+        slug {
+          current
+        }
+      }
+    }
   }
 `
 
 const ProductList = ({ data, pageContext }) => {
   const { productsLength } = pageContext
-  // const prevPage =
-  //   currentPage - 1 === 0 || currentPage - 1 === 1
-  //     ? `/products`
-  //     : `/products/${currentPage - 1}`
-
-  // const nextPage =
-  //   currentPage === numberOfPages
-  //     ? `/products/${currentPage}`
-  //     : `/products/${currentPage + 1}`
   const products = data.allSanityProduct.nodes
+  const allCatHome = data.allSanityProductCategory.nodes
   const myTheme = extendTheme(
     {
       colors: { ...theme.colors, brand: theme.colors.pink },
@@ -62,9 +61,13 @@ const ProductList = ({ data, pageContext }) => {
   )
   return (
     <ChakraProvider theme={myTheme}>
-      <Box bg="bg-surface">
+      <Box bg="white">
         <Navbar />
-        <Filter productsLength={productsLength} products={products} />
+        <Filter
+          allCatHome={allCatHome}
+          productsLength={productsLength}
+          products={products}
+        />
         <Footer />
       </Box>
     </ChakraProvider>

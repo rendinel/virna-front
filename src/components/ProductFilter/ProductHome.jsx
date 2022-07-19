@@ -4,7 +4,8 @@ import { ProductCard } from "./ProductCard"
 // import { products } from "./_data"
 import { ProductGrid } from "./ProductGrid"
 
-export const ProductHome = ({ products }) => {
+export const ProductHome = ({ productsCat }) => {
+  console.log("from home", productsCat)
   return (
     <Box
       maxW="7xl"
@@ -21,7 +22,7 @@ export const ProductHome = ({ products }) => {
       }}
     >
       <ProductGrid>
-        {products.map(product => (
+        {productsCat.map(product => (
           <ProductCard key={product.id} product={product} />
         ))}
       </ProductGrid>

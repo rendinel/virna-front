@@ -1,7 +1,4 @@
 import {
-  Box,
-  Checkbox,
-  CheckboxGroup,
   FormLabel,
   Input,
   InputGroup,
@@ -11,16 +8,10 @@ import {
 } from "@chakra-ui/react"
 import React from "react"
 import { FiSearch } from "react-icons/fi"
+import { Link } from "gatsby"
 
 export const CheckboxFilter = props => {
-  const {
-    options,
-    label,
-    hideLabel,
-    spacing = "2",
-    showSearch,
-    ...rest
-  } = props
+  const { options, label, hideLabel, spacing = "2", showSearch } = props
   return (
     <Stack as="fieldset" spacing={spacing}>
       {!hideLabel && (
@@ -44,19 +35,14 @@ export const CheckboxFilter = props => {
           </InputRightElement>
         </InputGroup>
       )}
-      <CheckboxGroup {...rest}>
-        {options.map(option => (
-          <Checkbox key={option.value} value={option.value} colorScheme="pink">
-            <span>{option.label}</span>
-            {option.count != null && (
-              <Box as="span" color="gray.500" fontSize="sm">
-                {" "}
-                ({option.count})
-              </Box>
-            )}
-          </Checkbox>
-        ))}
-      </CheckboxGroup>
+      <Link to={`/products`}>All</Link>
+      {options.map(item => {
+        return (
+          <Link to={`/products/categories/${item.slug.current}`} key={item.id}>
+            {item.title}
+          </Link>
+        )
+      })}
     </Stack>
   )
 }

@@ -12,7 +12,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const singleBlogCategory = require.resolve(
     "./src/templates/single-category.js"
   )
+
+  const allBlogCategory = require.resolve("./src/templates/category-list.js")
   const productsPerPage = 500
+  const catPostsPerPage = 100
   const { createPage } = actions
   const result = await graphql(`
     {
@@ -98,6 +101,23 @@ exports.createPages = async ({ graphql, actions }) => {
         limit: postsPerPage,
         offset: index * postsPerPage,
         numberOfPages: totalBlogListPages,
+        currentPage: index + 1,
+      },
+    })
+  })
+
+  const totalCategoryListPages = Math.ceil(
+    blogCategories.length / catPostsPerPage
+  )
+  Array.from({ length: totalCategoryListPages }).forEach((_, index) => {
+    createPage({
+      path:
+        index === 0 ? "/blogs/categories" : `/blogs/categories/${index + 1}`,
+      component: allBlogCategory,
+      context: {
+        limit: catPostsPerPage,
+        offset: index * catPostsPerPage,
+        numberOfPages: totalCategoryListPages,
         currentPage: index + 1,
       },
     })

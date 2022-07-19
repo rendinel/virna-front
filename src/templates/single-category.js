@@ -73,10 +73,6 @@ const SingleCategory = ({ data }) => {
   )
   const catBlog = data.sanityBlogCategory
   const blogsCat = data.allSanityBlog.nodes
-  const allBlogCat = data.allSanityBlogCategory.nodes
-  console.log("catBlog", catBlog)
-  console.log("blogsCat", blogsCat)
-  console.log("allblogcat", allBlogCat)
   return (
     <ChakraProvider theme={myTheme}>
       <SingleCatHome catBlog={catBlog} blogsCat={blogsCat} />

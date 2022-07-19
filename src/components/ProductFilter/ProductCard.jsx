@@ -2,10 +2,6 @@ import {
   AspectRatio,
   Box,
   Button,
-  HStack,
-  Image,
-  // Link,
-  Skeleton,
   Stack,
   Text,
   useBreakpointValue,
@@ -33,16 +29,6 @@ export const ProductCard = props => {
             image={product.coverImage.asset.gatsbyImageData}
             alt={product.coverImage.alt}
           />
-          {/* <Image
-            src={imageUrl}
-            alt={name}
-            draggable="false"
-            fallback={<Skeleton />}
-            borderRadius={useBreakpointValue({
-              base: "md",
-              md: "xl",
-            })}
-          /> */}
         </AspectRatio>
       </Box>
       <Stack>

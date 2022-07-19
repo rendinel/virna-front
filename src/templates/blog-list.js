@@ -43,7 +43,6 @@ export const BlogsQuery = graphql`
 const BlogList = ({ data, pageContext }) => {
   const { currentPage, numberOfPages } = pageContext
   const blogs = data.allSanityBlog.nodes
-  console.log(blogs, "home")
   const myTheme = extendTheme(
     {
       colors: { ...theme.colors, brand: theme.colors.pink },

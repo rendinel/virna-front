@@ -74,7 +74,7 @@ const SingleProduct = ({ data }) => {
   const recomendedProduct = data.allSanityProduct.nodes
   return (
     <ChakraProvider theme={myTheme}>
-      <Box bg="bg-surface">
+      <Box>
         <Navbar />
         <ProductDetails
           product={product}
